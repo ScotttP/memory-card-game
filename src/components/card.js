@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import CardDisplay from "./cardDisplay";
+import game from "./game";
 
 export default function Card() {
 	const [cardArray, setCardArray] = useState([
@@ -7,6 +9,11 @@ export default function Card() {
 		{ image: "https://...", name: "Ron Weasley", clickedOn: false },
 		{ image: "https://...", name: "Neville Longbottom", clickedOn: false },
 	]);
+	function wrapperFunction(i) {
+		shuffleIndex();
+		//markAsClicked(i); once this is called, shuffleIndex doesn't work... might have to do with the rendering of the component.
+		// game();
+	}
 
 	function shuffleIndex() {
 		let newArray = [];
@@ -17,11 +24,23 @@ export default function Card() {
 		setCardArray(newArray);
 		console.log(cardArray);
 	}
+	function markAsClicked(index) {
+		const copyCardArray = JSON.parse(JSON.stringify(cardArray));
+		copyCardArray[index].clickedOn = true;
+		setCardArray(copyCardArray);
+		if (cardArray[index].clickedOn === true) {
+			console.log("this was clicked on already. gameover!");
+		}
+		// set the score as well
+	}
+	const memoryCardRendering = cardArray.map((element, index) => (
+		<CardDisplay
+			key={element.name + index}
+			index={index}
+			info={element}
+			onClick={() => wrapperFunction(index)}
+		/>
+	));
 
-	return (
-		<div>
-			<h1>MEMORY CARD</h1>
-			<button onClick={shuffleIndex}>shuffle</button>
-		</div>
-	);
+	return <div>{memoryCardRendering}</div>;
 }
