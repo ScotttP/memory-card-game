@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CardDisplay from "./cardDisplay";
 import game from "./game";
 
@@ -9,30 +9,36 @@ export default function Card() {
 		{ image: "https://...", name: "Ron Weasley", clickedOn: false },
 		{ image: "https://...", name: "Neville Longbottom", clickedOn: false },
 	]);
-	function wrapperFunction(i) {
-		shuffleIndex();
-		//markAsClicked(i); once this is called, shuffleIndex doesn't work... might have to do with the rendering of the component.
-		// game();
+	const [score, setScore] = useState({
+		currentScore: 0,
+		highScore: 0,
+	});
+
+	function wrapperFunction(index) {
+		shuffleIndex(index); //once this is called, shuffleIndex doesn't work... might have to do with the rendering of the component.
+		//game();
 	}
 
-	function shuffleIndex() {
+	function shuffleIndex(index) {
 		let newArray = [];
 		for (let i = 0; i <= cardArray.length - 1; i++) {
 			let newIndex = Math.floor(Math.random() * cardArray.length);
 			newArray.splice(newIndex, 0, cardArray[i]);
 		}
-		setCardArray(newArray);
-		console.log(cardArray);
+		markAsClicked(index, newArray);
 	}
-	function markAsClicked(index) {
-		const copyCardArray = JSON.parse(JSON.stringify(cardArray));
-		copyCardArray[index].clickedOn = true;
-		setCardArray(copyCardArray);
+	function markAsClicked(index, newArray) {
 		if (cardArray[index].clickedOn === true) {
-			console.log("this was clicked on already. gameover!");
+			console.log("setBestScore");
+			console.log("resetGame");
 		}
-		// set the score as well
+		cardArray[index].clickedOn = true;
+		setCardArray(newArray);
 	}
+	useEffect(() => {
+		console.log("useEffect");
+	});
+
 	const memoryCardRendering = cardArray.map((element, index) => (
 		<CardDisplay
 			key={element.name + index}
