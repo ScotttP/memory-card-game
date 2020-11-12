@@ -12,13 +12,19 @@ export default function App() {
 		{ image: "https://...", name: "Neville Longbottom", clickedOn: false },
 	]);
 	const [currentScore, setCurrentScore] = useState(0);
-	const [highScore, setHighScore] = useState(0);
+	const [highScore, setHighScore] = useState();
+
+	useEffect(() => {
+		if (!localStorage.getItem("highScore")) {
+			setHighScore(0);
+		} else {
+			setHighScore(JSON.parse(localStorage.getItem("highScore")));
+		}
+	}, [highScore]);
 
 	function wrapperFunction(index) {
 		shuffleIndex(index); //once this is called, shuffleIndex doesn't work... might have to do with the rendering of the component.
-		setCurrentScore(currentScore + 1);
 		//game();
-		console.log(currentScore);
 	}
 
 	function shuffleIndex(index) {
@@ -33,23 +39,32 @@ export default function App() {
 		if (cardArray[index].clickedOn === true) {
 			evaluateHighScore();
 			setCurrentScore(0);
+			resetGame();
+		} else {
+			cardArray[index].clickedOn = true;
+			setCardArray(newArray);
+			setCurrentScore(currentScore + 1);
 		}
-		cardArray[index].clickedOn = true;
-		setCardArray(newArray);
 	}
 	function evaluateHighScore() {
-		if (!localStorage.getItem("highScore")) {
+		console.log();
+		if (!localStorage.getItem("highScore") || currentScore > highScore) {
 			setHighScore(currentScore);
-		} else if (currentScore > highScore) {
-			setHighScore(currentScore);
+			localStorage.setItem("highScore", currentScore);
 		} else {
-			return;
+			setHighScore(JSON.parse(localStorage.getItem("highscore")));
 		}
+		setCurrentScore(0);
 	}
 
-	useEffect(() => {
-		console.log("useEffect");
-	});
+	function resetGame() {
+		setCardArray([
+			{ image: "https://...", name: "Harry Potter", clickedOn: false },
+			{ image: "https://...", name: "Hermoine Grainger", clickedOn: false },
+			{ image: "https://...", name: "Ron Weasley", clickedOn: false },
+			{ image: "https://...", name: "Neville Longbottom", clickedOn: false },
+		]);
+	}
 
 	const memoryCardRendering = cardArray.map((element, index) => (
 		<Card

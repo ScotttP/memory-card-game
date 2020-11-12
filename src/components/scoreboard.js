@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 export default function Scoreboard(props) {
 	return (
 		<div>
