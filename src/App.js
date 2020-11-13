@@ -60,7 +60,7 @@ export default function App() {
 	return (
 		<div id="appContainer">
 			<Scoreboard currentScore={currentScore} highScore={highScore} />
-			{memoryCardRendering}
+			<div id="cardContainer">{memoryCardRendering}</div>
 		</div>
 	);
 }

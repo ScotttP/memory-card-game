@@ -2,8 +2,13 @@ import React from "react";
 
 export default function Card(props) {
 	return (
-		<div onClick={props.onClick}>
-			<h1>{props.info.name}</h1>
+		<div className="cards" onClick={props.onClick}>
+			<img
+				className="characterImage"
+				src={props.info.image}
+				alt={props.info.name}
+			></img>
+			<p className="nameHeading">{props.info.name}</p>
 		</div>
 	);
 }
