@@ -41,6 +41,7 @@ html {
 	padding: 5%;
 }
 header {
-	background-image: url(https://images.ctfassets.net/usf1vwtuqyxm/3QQaEkThAnIAiXveGhJYD9/f79a571dbe9fd456d65e783040601fdc/hogwarts-castle-.jpg?fm=jpg);
+	background-image: url(https://i.pinimg.com/originals/c4/dd/72/c4dd7228c1ae1a47971eba4a4d809f98.jpg);
 	background-attachment: fixed;
+	background-repeat: repeat-x;
 }
