@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Fanwood+Text:ital@0;1&display=swap");
+
 * {
 	margin: 0;
 	padding: 0;
@@ -11,6 +13,9 @@ html {
 	background-attachment: fixed;
 }
 
+body {
+	font-family: "Fanwood Text", serif;
+}
 .cards {
 	display: flex;
 	flex-direction: column;
@@ -40,8 +45,20 @@ html {
 .nameHeading {
 	padding: 5%;
 }
-header {
-	background-image: url(https://i.pinimg.com/originals/c4/dd/72/c4dd7228c1ae1a47971eba4a4d809f98.jpg);
+
+.scoreboard h1 {
+	color: #e6dede;
+}
+
+.scoreboard {
+	background-image: url(https://codescience.com/images/uploads/blog/_blogHighlight/Lightning-ISV-Apps-Header.png);
 	background-attachment: fixed;
 	background-repeat: repeat-x;
+}
+
+#memoryCardFont {
+	height: 10vh;
+}
+#scoreContainer {
+	padding: 0 0 10px 10px;
 }
