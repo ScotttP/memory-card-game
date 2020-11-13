@@ -5,7 +5,7 @@ const cardArrayData = [
 	{ image: "https://...", name: "Neville Longbottom", clickedOn: false },
 	{ image: "https://...", name: "Rubeus Hagrid", clickedOn: false },
 	{ image: "https://...", name: "Sirius Black", clickedOn: false },
-	{ image: "https://...", name: "Severus Snap", clickedOn: false },
+	{ image: "https://...", name: "Severus Snape", clickedOn: false },
 	{ image: "https://...", name: "Draco Malfoy", clickedOn: false },
 	{ image: "https://...", name: "Albus Dumbledore", clickedOn: false },
 	{ image: "https://...", name: "Voldemort", clickedOn: false },

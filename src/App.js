@@ -21,44 +21,39 @@ export default function App() {
 	const [currentScore, setCurrentScore] = useState(0);
 	const [highScore, setHighScore] = useState();
 
-	// useEffect(() => {
-	// 	if (!localStorage.getItem("highScore")) {
-	// 		setHighScore(0);
-	// 	} else {
-	// 		setHighScore(JSON.parse(localStorage.getItem("highScore")));
-	// 	}
-	// }, [highScore]);
-
 	useEffect(() => {
-		console.log("clicked");
-	});
+		if (!localStorage.getItem("highScore")) {
+			setHighScore(0);
+		} else {
+			setHighScore(JSON.parse(localStorage.getItem("highScore")));
+		}
+		setCardArray(shuffleArray(cardArray));
+	}, [currentScore, highScore]);
 
-	function markAsClicked(e) {
-		// if (e.clickedOn) {
-		// 	evaluateHighScore();
-		// 	setCurrentScore(0);
-		// 	setCardArray(cardArrayData);
-		// } else {
-		// 	cardArrayCopy[index].clickedOn = true;
-		// 	shuffleArray(cardArrayCopy);
-		// 	setCurrentScore(currentScore + 1);
-		// }
-	}
+	const markAsClicked = (element) => {
+		if (element.clickedOn === true) {
+			evaluateHighScore();
+			setCurrentScore(0);
+			setCardArray(cardArrayData);
+		} else {
+			element.clickedOn = true;
+			setCurrentScore(currentScore + 1);
+		}
+	};
 
-	function evaluateHighScore() {
+	const evaluateHighScore = () => {
 		if (!localStorage.getItem("highScore") || currentScore > highScore) {
 			setHighScore(currentScore);
 			localStorage.setItem("highScore", currentScore);
 		}
-		setCurrentScore(0);
-	}
+	};
 
 	const memoryCardRendering = cardArray.map((element, index) => (
 		<Card
 			key={element.name + index}
 			index={index}
 			info={element}
-			onClick={() => markAsClicked()}
+			onClick={() => markAsClicked(element)}
 		/>
 	));
 
