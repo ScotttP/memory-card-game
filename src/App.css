@@ -24,6 +24,10 @@ body {
 	background-color: white;
 	width: 70%;
 	border-radius: 15px;
+	max-width: 300px;
+}
+.cards:hover {
+	cursor: pointer;
 }
 
 .characterImage {
@@ -53,12 +57,41 @@ body {
 .scoreboard {
 	background-image: url(https://codescience.com/images/uploads/blog/_blogHighlight/Lightning-ISV-Apps-Header.png);
 	background-attachment: fixed;
-	background-repeat: repeat-x;
+	background-repeat: none;
+	width: 100%;
+	background-size: 100vw 100vh;
+	display: flex;
+	justify-content: space-between;
 }
 
 #memoryCardFont {
 	height: 10vh;
 }
 #scoreContainer {
-	padding: 0 0 10px 10px;
+	padding: 5px 20px 5px 5px;
+}
+
+@media only screen and (min-width: 700px) {
+	#cardContainer {
+		grid-template-columns: 50% 50%;
+		grid-template-rows: repeat(4, minmax(10%, 1fr));
+	}
+}
+
+@media only screen and (min-width: 1000px) {
+	#cardContainer {
+		grid-template-columns: 33% 33% 33%;
+		grid-template-rows: repeat(4, minmax(10%, 1fr));
+	}
+}
+
+@media only screen and (max-width: 575px) {
+	.scoreboard {
+		display: block;
+	}
+}
+@media only screen and (max-width: 350px) {
+	#memoryCardFont {
+		width: 90%;
+	}
 }
